@@ -10,6 +10,7 @@ def get_available_flights(conn):
         SELECT DISTINCT Flyvning.flightNr, Flyvning.dato, Flyvning.lopeNr, Fly.flytypeNavn
         FROM Flyvning
         JOIN Fly ON Flyvning.registreringsNr = Fly.registreringsNr
+        WHERE Flyvning.status = 'Planned'
         ORDER BY Flyvning.flightNr ASC
     ''')
     return cursor.fetchall()
