@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('prosjekt.db')
+conn = sqlite3.connect('prosjekt-bruh.db')
 print("Connection Successful")
 
 def get_available_flights(conn):
@@ -10,7 +10,7 @@ def get_available_flights(conn):
         SELECT DISTINCT Flyvning.flightNr, Flyvning.dato, Flyvning.lopeNr, Fly.flytypeNavn
         FROM Flyvning
         JOIN Fly ON Flyvning.registreringsNr = Fly.registreringsNr
-        WHERE Flyvning.status = 'Planned'
+        Where Flyvning.status = 'Planned'
         ORDER BY Flyvning.flightNr ASC
     ''')
     return cursor.fetchall()
@@ -95,8 +95,18 @@ def main():
         print("No flights found. Please check your database.")
         return
     
-    for i, flight in enumerate(flights):
-        print(f"{i + 1}. Flight: {flight[0]} | Date: {flight[1]} | lopeNr: {flight[2]} | Type: {flight[3]}")
+    print("\n" + "="*70)
+    print("{:<5} {:<18} {:<12} {:<10} {:<20}".format(
+        "No.", "Flight Number", "Date", "LopeNr", "Aircraft Type"
+    ))
+    print("="*70)
+    
+    for i, flight in enumerate(flights, start=1):
+        print("{:<5} {:<18} {:<12} {:<10} {:<20}".format(
+            i, flight[0], flight[1], flight[2], flight[3]
+        ))
+    
+    print("="*70 + "\n")
     
     choice = int(input("Select a flight (enter number): ")) - 1
     if 0 <= choice < len(flights):
