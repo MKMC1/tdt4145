@@ -11,4 +11,10 @@ SELECT flyselskap.navn AS Flyselskap, flytypeNavn AS Flytype, Count(flytypeNavn)
 INNER JOIN flyselskap ON fly.flyselskapsKode = flyselskap.flyselskapsKode
 GROUP BY flytypeNavn;
 
-
+## Brukstilfelle 8
+Skriv commando 
+```bash
+py find_available_seats.py
+```
+For å sjekke om hvilken flyvning som har status 'Planned'. Brukeren skal deretter velge hvilket fly som hen ønsker å finne ledige seter for ved å skrive in nummer som flyet tilhører.
+Sete som er tatt blir markert med 'X', mens alle andre setene er vist som normalt. 
