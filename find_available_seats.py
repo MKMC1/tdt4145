@@ -46,7 +46,7 @@ def generate_seats(conn, flytypeNavn):
             sete_liste = list(seteMarkering)
         
         for sete in sete_liste:
-            all_seats.append((rad, sete, "EXIT" if rad in nødutganger else ""))
+            all_seats.append((rad, sete, "UTGANG" if rad in nødutganger else ""))
     
     return all_seats
 
@@ -81,10 +81,10 @@ def display_seats(all_seats, sold_seats, flytypeNavn):
         else:
             left_side = " ".join(seats_by_row[row][:3])
             right_side = " ".join(seats_by_row[row][3:])
-        exit_label = " (EXIT)" if any("EXIT" in s for s in all_seats if s[0] == row) else ""
+        exit_label = " (UTGANG)" if any("UTGANG" in s for s in all_seats if s[0] == row) else ""
         print(f"Rad {row:2}:  {left_side}   {right_side}{exit_label}")
     
-    print("\nStatus: X = Opptatt | Tilgjengelighet = Vist | (Utgang) = Nødutgang")
+    print("\nStatus: X = Opptatt | Tilgjengelig = Vist | (UTGANG) = Nødutgang")
     print("="*30 + "\n")
 
 def main():
