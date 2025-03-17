@@ -1,7 +1,7 @@
 import sqlite3
 
 conn = sqlite3.connect('prosjekt-bruh.db')
-print("Connection Successful")
+print("Koblingen er vellykket")
 
 def get_available_flights(conn):
     # Henter tilgjengelige flyvninger med lopeNr og flytypeNavn
@@ -71,7 +71,7 @@ def display_seats(all_seats, sold_seats, flytypeNavn):
         seats_by_row[row].append(seat_label)
     
     print("\n" + "="*30)
-    print("        Available Seats")
+    print("        Ledige Seter")
     print("="*30 + "\n")
     
     for row in sorted(seats_by_row.keys()):
@@ -82,22 +82,22 @@ def display_seats(all_seats, sold_seats, flytypeNavn):
             left_side = " ".join(seats_by_row[row][:3])
             right_side = " ".join(seats_by_row[row][3:])
         exit_label = " (EXIT)" if any("EXIT" in s for s in all_seats if s[0] == row) else ""
-        print(f"Row {row:2}:  {left_side}   {right_side}{exit_label}")
+        print(f"Rad {row:2}:  {left_side}   {right_side}{exit_label}")
     
-    print("\nStatus: X = Booked | Available = Shown | (EXIT) = Emergency Exit")
+    print("\nStatus: X = Opptatt | Tilgjengelighet = Vist | (Utgang) = Nødutgang")
     print("="*30 + "\n")
 
 def main():
-    print("Available Flights:")
+    print("Tilgjengelig flyvninger:")
     flights = get_available_flights(conn)
     
     if not flights:
-        print("No flights found. Please check your database.")
+        print("Ingen flyvning funnet.")
         return
     
     print("\n" + "="*70)
     print("{:<5} {:<18} {:<12} {:<10} {:<20}".format(
-        "No.", "Flight Number", "Date", "LopeNr", "Aircraft Type"
+        "No.", "Flynummer", "Dato", "LopeNr", "Flytype"
     ))
     print("="*70)
     
@@ -108,24 +108,24 @@ def main():
     
     print("="*70 + "\n")
     
-    choice = int(input("Select a flight (enter number): ")) - 1
+    choice = int(input("Velg en flynving (number): ")) - 1
     if 0 <= choice < len(flights):
         selected_flight = flights[choice]
         flightNr = selected_flight[0]
         lopeNr = selected_flight[2]
         flytypeNavn = selected_flight[3]
         
-        print(f"\nChecking available seats for Flight {selected_flight[0]} on {selected_flight[1]}...\n")
+        print(f"\nSjekker tilgjengelige seter for Flyvning {selected_flight[0]} on {selected_flight[1]}...\n")
         
         all_seats = generate_seats(conn, flytypeNavn)
         if not all_seats:
-            print("No seat configuration found for this aircraft type.")
+            print("Ingen sete konfigurasjon funnet for denne flytypen.")
             return
         
         sold_seats = get_sold_seats(conn, lopeNr, flightNr)
         display_seats(all_seats, sold_seats, flytypeNavn)
     else:
-        print("Invalid selection. Please enter a valid number.")
+        print("Ugyldig number.")
     
     conn.close()
 
