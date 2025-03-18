@@ -24,7 +24,7 @@ Brukeren skriver inn valgt flyplasskode, ukedagskode, og om hen vil se avganger 
 ## Brukstilfelle 8
 Skriv commando 
 ```py
-py find_available_seats.py
+py finn_ledige_seter.py
 ```
 For å sjekke om hvilken flyvning som har status 'Planned'. Brukeren skal deretter velge hvilket fly som hen ønsker å finne ledige seter for ved å skrive in nummer som flyet tilhører.
 Sete som er tatt blir markert med 'X', mens alle andre setene er vist som normalt. 
