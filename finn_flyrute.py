@@ -60,10 +60,19 @@ def finn_flyruter():
 
         stopp.sort()
 
-        rute_rekkefølge = " ➝ ".join([s[1] for s in stopp] + [stopp[-1][2]])
+        reiserute = []
+        for i in range(len(stopp)):
+            if i == 0:
+                reiserute.append(stopp[i][1])  
+            reiserute.append(stopp[i][2])  
+
+        reiserute_renset = []
+        for sted in reiserute:
+            if not reiserute_renset or reiserute_renset[-1] != sted:
+                reiserute_renset.append(sted)
 
         print(f"   Planlagt {reise} tidspunkt: {stopp[0][0]}")
-        print(f"   Rute: {rute_rekkefølge}")
+        print(f"   Rute: {' ➝ '.join(reiserute_renset)}")
         print("-" * 50)
 
     conn.close()  #Lukk tilkoblingen!
