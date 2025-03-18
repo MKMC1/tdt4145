@@ -19,7 +19,7 @@ Skriv commando
 ```py
 py finn_flyrute.py
 ```
-Brukeren skriver inn valgt flyplasskode, ukedagskode, og om hen vil se avganger eller ankomster. Deretter dukker det opp en tabell hvor brukeren kan se flyrutenummer, planlagt avgangstid eller planlagt ankomsttid avhengig av hva brukeren har valgt, samt alle avganger og ankomster  
+Brukeren skriver inn valgt flyplasskode, ukedagskode, og om hen vil se avganger eller ankomster. Deretter dukker det opp en oversikt hvor brukeren kan se alle de aktuelle flyrutenummerne, med planlagt avgangstid eller planlagt ankomsttid avhengig av hva brukeren har valgt, samt hele flyruten. 
 
 ## Brukstilfelle 8
 Skriv commando 
