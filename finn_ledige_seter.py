@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('prosjekt-bruh.db')
+conn = sqlite3.connect('prosjekt.db')
 print("Koblingen er vellykket")
 
 def get_available_flights(conn):
