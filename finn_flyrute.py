@@ -1,5 +1,5 @@
 import sqlite3
-
+from collections import defaultdict
 
 def finn_flyruter():
     """Lar brukeren søke etter flyruter basert på flyplasskode, ukedag og type flyvning (Avgang/Ankomst)."""
@@ -22,6 +22,7 @@ def finn_flyruter():
 
     tidskolonne = "planlagtAvreistTid" if flyvning_type == "AVR" else "planlagtAnkomstTid"
     reisekolonne = "avreiseFlyplassKode" if flyvning_type == "AVR" else "ankomstFlyplassKode"
+    reise = "avreise" if flyvning_type == "AVR" else "ankomst"
     # SQL-spørring basert på flyvning_type
     sql = f"""
     SELECT Delreise.flightNr, Delreise.{tidskolonne}, avreiseFlyplassKode, ankomstFlyplassKode
@@ -43,20 +44,29 @@ def finn_flyruter():
     # Skriv ut resultatene
     if not ruter:
         print("Ingen flyruter funnet for denne flyplassen og ukedagen.")
-    else:
-        print("\nFlyruter funnet:\n")
-        print(
-            f"{'flightNr':<10} {tidskolonne:<20} {'avreise':<7} {'ankomst':<7}"
-        )
-        print("-" * 65)
+        conn.close() #Lukk tilkoblingen!
+        return
+
+    print(f'\nFlyruter funnet for "{reise}" på {flyplass_kode} flyplass, ukedag {ukedag}:\n')
+
+    flyruter = defaultdict(list)
 
     for rute in ruter:
-        print(
-            f"{rute[0]:<10} {rute[1]:<20} {rute[2]:<7} {rute[3]:<7}"
-        )
+        flightNr, tid, avreise, ankomst = rute
+        flyruter[flightNr].append((tid, avreise, ankomst))
 
-    conn.close()  # Close the connection
+    for flightNr, stopp in flyruter.items():
+        print(f"\nFlightNr: {flightNr}")
 
+        stopp.sort()
 
-# Kjør programmet
+        rute_rekkefølge = " ➝ ".join([s[1] for s in stopp] + [stopp[-1][2]])
+
+        print(f"   Planlagt {reise} tidspunkt: {stopp[0][0]}")
+        print(f"   Rute: {rute_rekkefølge}")
+        print("-" * 50)
+
+    conn.close()  #Lukk tilkoblingen!
+
+# Kjøre programmet
 finn_flyruter()
