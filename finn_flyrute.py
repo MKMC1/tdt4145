@@ -15,22 +15,16 @@ def finn_flyruter():
 
     # Valider brukerinput
     while True:
-        flyvning_type = input(
-            "Skriv 'Avr' for avreise eller 'Ank' for ankomster: "
-        ).upper()
+        flyvning_type = input("Skriv 'Avr' for avreise eller 'Ank' for ankomster: ").upper()
         if flyvning_type in ["AVR", "ANK"]:
-            break
+            break  
         print("Ugyldig valg! Skriv 'Avr' for avreise eller 'Ank' for ankomster.")
 
-    tidskolonne = (
-        "planlagtAvreistTid" if flyvning_type == "AVR" else "planlagtAnkomstTid"
-    )
-    reisekolonne = (
-        "avreiseFlyplassKode" if flyvning_type == "AVR" else "ankomstFlyplassKode"
-    )
+    tidskolonne = "planlagtAvreistTid" if flyvning_type == "AVR" else "planlagtAnkomstTid"
+    reisekolonne = "avreiseFlyplassKode" if flyvning_type == "AVR" else "ankomstFlyplassKode"
     # SQL-spørring basert på flyvning_type
     sql = f"""
-    SELECT Delreise.flightNr, Delreise.{tidskolonne}, ukedagsKode, avreiseFlyplassKode, ankomstFlyplassKode
+    SELECT Delreise.flightNr, Delreise.{tidskolonne}, avreiseFlyplassKode, ankomstFlyplassKode
     FROM Delreise
     JOIN Flyruter ON Flyruter.flightNr = Delreise.flightNr
     WHERE Delreise.flightNr IN (
@@ -52,12 +46,14 @@ def finn_flyruter():
     else:
         print("\nFlyruter funnet:\n")
         print(
-            f"{'flightNr':<10} {tidskolonne:<20} {'ukedag':<7} {'avreise':<7} {'ankomst':<7}"
+            f"{'flightNr':<10} {tidskolonne:<20} {'avreise':<7} {'ankomst':<7}"
         )
         print("-" * 65)
 
     for rute in ruter:
-        print(f"{rute[0]:<10} {rute[1]:<20} {rute[2]:<7} {rute[3]:<7} {rute[4]:<7}")
+        print(
+            f"{rute[0]:<10} {rute[1]:<20} {rute[2]:<7} {rute[3]:<7}"
+        )
 
     conn.close()  # Close the connection
 
