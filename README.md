@@ -9,8 +9,8 @@ Databasen er da klar til bruk med alle dataene i vedleggene.
 ## Brukstilfelle 5
 Her er ren sql-spørring som er for brukstilfelle 5.
 ```sql
-SELECT flyselskap.navn AS Flyselskap, flytypeNavn AS Flytype, Count(flytypeNavn) AS 'Antall fly' FROM Fly
-INNER JOIN flyselskap ON fly.flyselskapsKode = flyselskap.flyselskapsKode
+SELECT flyselskap.navn AS Flyselskap, flytypeNavn AS Flytype, Count(flytypeNavn) AS 'Antall fly'
+FROM Fly INNER JOIN flyselskap ON fly.flyselskapsKode = flyselskap.flyselskapsKode
 GROUP BY flytypeNavn;
 ```
 
