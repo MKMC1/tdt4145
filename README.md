@@ -1,21 +1,39 @@
 # Bruksanvisning
 
 ## Brukstilfelle 1, 2, 3, 4, og 7 
+Først vær sikker på at du er i samme mappe som alle filene du har lastet ned.
+
 1. Åpne sqlite3 i cmd eller Bash.
-2. Bruk .open prosjekt.db for å åpne en tom db-fil, men som har ønsket skjema for databasen.
-3. Bruk .read sql_insert_data.sql for å sette inn all dataen.
+   ```
+   sqlite3
+   ```
+3. Bruk .open prosjekt.db for å åpne en tom db-fil, men som har ønsket skjema for databasen.
+   ```
+   .open prosjekt.db
+   ```
+5. Bruk .read sql_insert_data.sql for å sette inn all dataen.
+   ```
+   .read sql_insert_data.sql
+   ```
 
 Databasen er da klar til bruk med alle dataene i vedleggene. 
 ## Brukstilfelle 5
-Her er ren sql-spørring som er for brukstilfelle 5.
+Her er ren sql-spørring som er for brukstilfelle 5, men først skriv denne kommandoen for å få finere utskrift fra sql.
+```sql
+.mode table
+```
+Også kan du skrive denne kommandoen:
 ```sql
 SELECT flyselskap.navn AS Flyselskap, flytypeNavn AS Flytype, Count(flytypeNavn) AS 'Antall fly'
 FROM Fly INNER JOIN flyselskap ON fly.flyselskapsKode = flyselskap.flyselskapsKode
 GROUP BY flytypeNavn;
 ```
-
+For neste tilfelle må du ut av sqlite3 programmet. Dette gjøres ved å skrive kommandoen:
+```py
+.exit
+```
 ## Brukstilfelle 6
-Skriv commando 
+Skriv kommandoen: 
 ```py
 py finn_flyrute.py
 ```
