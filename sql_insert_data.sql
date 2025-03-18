@@ -76,6 +76,8 @@ INSERT INTO Flybillettpris VALUES ('premium','SK888', 3, 2200);
 INSERT INTO Flybillettpris VALUES ('okonomi','SK888', 3, 1700);
 INSERT INTO Flybillettpris VALUES ('budsjett','SK888', 3, 1000);
 
+INSERT INTO Booking VALUES(1,1);
+
 INSERT INTO Sete VALUES(1,'WF1302','A',8,1);
 INSERT INTO Sete VALUES(1,'WF1302','B',8,1);
 INSERT INTO Sete VALUES(1,'WF1302','C',8,1);
